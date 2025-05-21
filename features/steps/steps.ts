@@ -1,0 +1,16 @@
+import { Given, When, Then } from '@cucumber/cucumber';
+import { expect } from '@playwright/test';
+import { page } from '../../playwright-setup';
+
+Given('I open {string}', async (url: string) => {
+  await page.goto(url);
+});
+
+When('I type {string} in search', async (text: string) => {
+  await page.fill('input[name="q"]', text);
+  await page.press('input[name="q"]', 'Enter');
+});
+
+Then('I see results containing {string}', async (text: string) => {
+  await expect(page.locator('body')).toContainText(text);
+});
