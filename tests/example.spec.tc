@@ -1,7 +1,12 @@
 import { Given, When, Then } from '@cucumber/cucumber';
 import { expect } from '@playwright/test';
 import { page } from '../../playwright-setup';
+import { test, expect } from '@playwright/test';
 
+test('Basic Playwright Test', async ({ page }) => {
+  await page.goto('https://playwright.dev');
+  await expect(page).toHaveTitle(/Playwright/);
+});
 Given('I open {string}', async (url: string) => {
   await page.goto(url);
 });
